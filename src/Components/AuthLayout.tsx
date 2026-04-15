@@ -26,9 +26,9 @@ const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <p>Let’s Get You Started</p>
 
         <ul>
-          <li>✔ 24/7 AI Medical Support</li>
-          <li>✔ Instant Doctor Connection</li>
-          <li>✔ Secure and Private</li>
+          <li>&#10004; 24/7 AI Medical Support</li>
+          <li>&#10004; Instant Doctor Connection</li>
+          <li>&#10004; Secure and Private</li>
         </ul>
 
         <p className="tagline">Your Health, Simplified.</p>

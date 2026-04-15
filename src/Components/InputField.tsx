@@ -12,9 +12,13 @@ interface InputFieldProps {
   placeholder: string;
   icon?: React.ReactNode;
   name: string;
+
+  // 🔥 NEW (for backend connection)
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ type, placeholder, icon, name }) => {
+const InputField: React.FC<InputFieldProps> = ({ type, placeholder, icon, name, value, onChange }) => {
   return (
     <div className="input-container">
       {/* Icon (left side) */}
@@ -26,6 +30,9 @@ const InputField: React.FC<InputFieldProps> = ({ type, placeholder, icon, name }
         placeholder={placeholder}
         name={name}
         className="input-field"
+
+        value={value}        //  controlled input
+        onChange={onChange}  //  updates state
       />
 
       {/* 

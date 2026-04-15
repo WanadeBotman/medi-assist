@@ -13,47 +13,91 @@ import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
  * - Will connect to backend authentication API
  */
 
-const Signup: React.FC = () => {
 
-{/* navigation to the login page */}
-const navigate = useNavigate();
-  
+
+
+
+const Signup: React.FC = () => {
+  // navigation to the login page
+  const navigate = useNavigate();
+
+  // FORM STATE (stores all user inputs)
+  const [formData, setFormData] = React.useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  // 🔥 HANDLE INPUT CHANGES
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    /**
+     * BACKEND TEAM NOTE:
+     * ------------------
+     * Field names MUST match backend DTO:
+     * fullName, email, password
+     */
+  };
+
   // FUNCTION: Handle form submission
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    /**
-     * BACKEND CONNECTION POINT:
-     * ----------------------------------
-     * Collect form data here and send to backend
-     * Example:
-     * 
-     * fetch("/api/auth/signup", {
-     *   method: "POST",
-     *   headers: { "Content-Type": "application/json" },
-     *   body: JSON.stringify({
-     *     fullName,
-     *     email,
-     *     password,
-     *   }),
-     * });
-     *
-     * Backend Team:
-     * - Endpoint expected: POST /api/auth/signup
-     * - Return JWT token + user object
-     */
+    // VALIDATION
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-    /**
-     * NAVIGATION NOTE FOR TEAM:
-     * ------------------------
-     * - Clicking "Sign In" redirects user to /login route
-     * - Login page will handle authentication logic
-     * - Backend endpoint expected: POST /api/auth/login
-     * - On success: return JWT + user data
-     */
+    try {
+      /**
+       * BACKEND CONNECTION STARTS HERE
+       * --------------------------------
+       * Endpoint: POST /api/auth/signup
+       */
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
+      const data = await response.json();
 
-    console.log("Signup clicked");
+      /**
+       * BACKEND EXPECTATION:
+       * --------------------
+       * {
+       *   token: string,
+       *   user: { id, email, fullName }
+       * }
+       */
+
+      if (response.ok) {
+        // SAVE TOKEN
+        localStorage.setItem("token", data.token);
+
+        // REDIRECT USER
+        window.location.href = "/dashboard";
+      } else {
+        alert(data.message || "Signup failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Server error");
+    }
   };
 
   return (
@@ -74,18 +118,22 @@ const navigate = useNavigate();
         {/* FORM */}
         <form onSubmit={handleSignup}>
           
-          <InputField
+         <InputField
             type="text"
             placeholder="Full Name"
             icon={<FaUser />}
             name="fullName"
-          />
+            value={formData.fullName}
+            onChange={handleChange}
+         />
 
           <InputField
             type="email"
             placeholder="Email"
             icon={<FaEnvelope />}
             name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
 
           <InputField
@@ -93,6 +141,8 @@ const navigate = useNavigate();
             placeholder="Password"
             icon={<FaLock />}
             name="password"
+            value={formData.password}
+            onChange={handleChange}
           />
 
           <InputField
@@ -100,6 +150,8 @@ const navigate = useNavigate();
             placeholder="Confirm Password"
             icon={<FaLock />}
             name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
           />
 
           {/* TERMS */}
