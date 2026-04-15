@@ -1,7 +1,7 @@
 import React from "react";
-import InputField from "../components/InputField";
-import SocialButton from "../components/SocialButton";
-import AuthLayout from "../components/AuthLayout";
+import InputField from "../Components/InputField";
+import SocialButton from "../Components/SocialButton";
+import AuthLayout from "../Components/AuthLayout";
 import "../Styles/Signup.css";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
