@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
@@ -12,6 +16,7 @@ html, body, #root {
   display: flex;
   height: 100vh;
   width: 100%;
+  overflow: hidden;
 }
 
 /* LEFT SIDE */
@@ -81,8 +86,10 @@ html, body, #root {
 
 /* FORM */
 .signup-box {
-  width: 350px;
-  padding: 20px 0; 
+  width: 100%;
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 30px;
 }
 
 .signup-box h2 {
@@ -146,7 +153,8 @@ html, body, #root {
 
 .signup-btn {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
+  font-size: 16px;
   border-radius: 30px;
   border: none;
   background: linear-gradient(135deg, #2d6cdf, #1e4db7);
@@ -169,8 +177,68 @@ html, body, #root {
 .terms {
   font-size: 12px;
   margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .agree-on-terms {
   margin-left: 5px;
+}
+
+/* =========================
+   MOBILE RESPONSIVENESS
+   ========================= */
+
+@media screen and (max-width: 768px) {
+
+  .auth-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+    flex: none;
+  }
+
+  .auth-right {
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .signup-box {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .input-container {
+    width: 100%;
+  }
+
+  .input-field {
+    font-size: 14px;
+  }
+
+  .social-button,
+  .signup-btn {
+    width: 100%;
+  }
+
+  .terms {
+    font-size: 12px;
+  }
 }
