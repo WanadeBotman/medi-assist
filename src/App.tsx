@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+<<<<<<< HEAD
 import Signup from "./Pages/Signup";
 // import Login from "./pages/Login"; <-- will work after teammate pushes
 
@@ -39,3 +40,22 @@ function App() {
 }
 
 export default App;
+=======
+import Login from "./pages/Login";
+
+export default function App() {
+    return (
+    <BrowserRouter>
+        
+        {/* Main content area where routes are rendered */}
+        <main style={{ flexGrow: 1, padding: "20px" }}>
+        <Routes>
+            <Route path="/" element={<Login />} />
+            {/*<Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />*/}
+        </Routes>
+        </main>
+    </BrowserRouter>
+    );
+}
+>>>>>>> 9ca543bf54eb1e15727feee8b461ef9f8bb6a6bb

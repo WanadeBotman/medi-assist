@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 /* ============================================================
    FILE: main.tsx
    Path: src/main.tsx
+=======
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+/*import "./index.css";*/
+import App from './App.tsx'
+>>>>>>> 9ca543bf54eb1e15727feee8b461ef9f8bb6a6bb
 
    This is the entry point of the React app. It mounts the
    <App /> component into the #root div in index.html.
