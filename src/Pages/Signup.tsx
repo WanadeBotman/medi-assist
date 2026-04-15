@@ -1,8 +1,8 @@
 import React from "react";
-import InputField from "../Components/InputField";
-import SocialButton from "../Components/SocialButton";
-import AuthLayout from "../Components/AuthLayout";
-import "../styles/signup.css";
+import InputField from "../components/InputField";
+import SocialButton from "../components/SocialButton";
+import AuthLayout from "../components/AuthLayout";
+import "../Styles/Signup.css";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 
@@ -29,7 +29,7 @@ const Signup: React.FC = () => {
     confirmPassword: "",
   });
 
-  // 🔥 HANDLE INPUT CHANGES
+  // HANDLE INPUT CHANGES
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -90,7 +90,7 @@ const Signup: React.FC = () => {
         localStorage.setItem("token", data.token);
 
         // REDIRECT USER
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       } else {
         alert(data.message || "Signup failed");
       }
@@ -157,7 +157,7 @@ const Signup: React.FC = () => {
           {/* TERMS */}
           <div className="terms">
             <input type="checkbox" required />
-            <span>I agree to Terms of Service</span>
+            <span className="agree-on-terms">I agree to Terms of Service</span>
           </div>
 
           {/* SUBMIT */}

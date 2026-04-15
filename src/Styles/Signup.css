@@ -73,7 +73,7 @@ html, body, #root {
 }
 
 .tagline {
-    color: darkcyan;
+    color: white;
     font-size: 30px;
     font-weight: 600;
     margin-top: 20px;
@@ -169,4 +169,8 @@ html, body, #root {
 .terms {
   font-size: 12px;
   margin: 10px 0px;
+}
+
+.agree-on-terms {
+  margin-left: 5px;
 }
