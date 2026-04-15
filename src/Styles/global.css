@@ -1,0 +1,74 @@
+/* ============================================================
+   GLOBAL STYLES — Medi-Assist Telehealth App
+   Shared across all pages. Uses CSS variables so the whole
+   team can update the theme from one place.
+   ============================================================ */
+
+/* Google Font Import — used for all text in the app */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@600;700;800&display=swap');
+
+/* ── Design Tokens ──────────────────────────────────────────
+   Change these variables to restyle the entire app at once.
+   Backend/DB team: these are purely visual — no API impact.
+   ─────────────────────────────────────────────────────────── */
+:root {
+  --brand-blue: #3b5bdb;         /* Primary brand colour */
+  --brand-blue-dark: #2f4ac7;    /* Hover state for brand elements */
+  --brand-blue-light: #eef2ff;   /* Light tint for backgrounds */
+  --accent-red: #e03131;         /* Red cross / alert colour */
+  --text-primary: #111827;       /* Main body text */
+  --text-secondary: #6b7280;     /* Subtitles, hints */
+  --text-white: #ffffff;
+  --bg-white: #ffffff;
+  --bg-light: #f9fafb;
+  --border-color: #e5e7eb;
+  --input-bg: #f3f4f6;
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
+  --font-body: 'DM Sans', sans-serif;
+  --font-heading: 'Sora', sans-serif;
+  --transition: all 0.2s ease;
+}
+
+/* ── CSS Reset & Base ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+a {
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input {
+  font-family: var(--font-body);
+}
