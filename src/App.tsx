@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 
 /**
  * ROOT APPLICATION ROUTING FILE
@@ -16,8 +16,8 @@ export default function App() {
     <BrowserRouter>
       <main style={{ flexGrow: 1, padding: "20px" }}>
         <Routes>
-          {/* Signup Page (Default Page) */}
-          <Route path="/" element={<Signup />} />
+          {/* Login Page (Default Page) */}
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
