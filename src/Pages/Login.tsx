@@ -11,18 +11,49 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // BACKEND INTEGRATION POINT: Login API
-    // const response = await fetch('/api/auth/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password })
-    // });
-    
-    setTimeout(() => setIsLoading(false), 1000);
-  };
+  e.preventDefault();
+  setIsLoading(true);
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
+
+    let data;
+    try {
+      data = await response.json();
+    } catch {
+      data = {};
+    }
+
+    if (response.ok) {
+      // Save token
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // Redirect (IMPORTANT)
+      window.location.href = "/dashboard";
+    } else {
+      alert(data.message || "Login failed");
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Server error");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleGoogleLogin = () => {
     // BACKEND INTEGRATION POINT: Google OAuth

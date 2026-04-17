@@ -13,7 +13,7 @@ interface InputFieldProps {
   icon?: React.ReactNode;
   name: string;
 
-  // 🔥 NEW (for backend connection)
+  // NEW (for backend connection)
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -167,6 +167,13 @@ html, body, #root {
 
 .signup-btn:hover {
   transform: scale(1.02);
+  opacity: 0.7;
+  padding: 14px;
+}
+
+.signup-btn:active {
+  transform: scale(0.98);
+  opacity: 0.5;
 }
 
 .divider {

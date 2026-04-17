@@ -47,59 +47,58 @@ const Signup: React.FC = () => {
   };
 
   // FUNCTION: Handle form submission
+  
+  const [loading, setLoading] = React.useState(false);
+
+  // FUNCTION: Handle form submission
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // VALIDATION
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
+    setLoading(true);
+
     try {
-      /**
-       * BACKEND CONNECTION STARTS HERE
-       * --------------------------------
-       * Endpoint: POST /api/auth/signup
-       */
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+          }),
         },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      );
 
-      const data = await response.json();
-
-      /**
-       * BACKEND EXPECTATION:
-       * --------------------
-       * {
-       *   token: string,
-       *   user: { id, email, fullName }
-       * }
-       */
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
 
       if (response.ok) {
-        // SAVE TOKEN
         localStorage.setItem("token", data.token);
-
-        // REDIRECT USER
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/dashboard");
       } else {
         alert(data.message || "Signup failed");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error);
       alert("Server error");
+    } finally {
+      setLoading(false);
     }
   };
-
+  
   return (
     <AuthLayout>
       <div className="signup-box">
@@ -161,8 +160,8 @@ const Signup: React.FC = () => {
           </div>
 
           {/* SUBMIT */}
-          <button type="submit" className="signup-btn">
-            Get Started
+          <button type="submit" className="signup-btn" disabled={loading}>
+            {loading ? "Creating..." : "Get Started"}
           </button>
         </form>
 
